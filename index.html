@@ -39,7 +39,7 @@
 
 <button onclick="showCase1()">Case 1: Aortic Stenosis</button>
 <button onclick="showCase2()">Case 2: Proximal Myopathy</button>
-<button>Case 3: Ascites with Hepatomegaly</button>
+<button><button onclick="showCase3()">Case 3: Ascites with Hepatomegaly</button>
 
 <div id="case1" class="case">
 
@@ -105,6 +105,40 @@ Sensation is intact. There is no ptosis or fatigability and no upper motor neuro
 
 </div>
 
+  <div id="case3" class="case">
+
+<h2>Case 3: Ascites with Hepatomegaly</h2>
+
+<p>
+A patient presents with increasing abdominal distension, bilateral lower limb swelling
+and reduced exercise tolerance.
+</p>
+
+<p>
+There is no history of significant alcohol use, viral hepatitis or gastrointestinal bleeding.
+</p>
+
+<h3>Examination</h3>
+
+<p>
+The patient has ascites, hepatomegaly and bilateral lower limb oedema.
+</p>
+
+<h3>Your Clinical Reasoning</h3>
+
+<p>
+What are the main causes of ascites? Which conditions can cause both ascites and hepatomegaly?
+</p>
+
+<textarea id="answer3" placeholder="Type your answer here..."></textarea>
+
+<br><br>
+
+<button onclick="giveFeedback3()">Submit Answer</button>
+
+<div id="feedback3"></div>
+
+</div>
 <script>
 
 function showCase1() {
@@ -113,6 +147,8 @@ function showCase1() {
 
   function showCase2() {
   document.getElementById("case2").style.display = "block";
+}function showCase3() {
+  document.getElementById("case3").style.display = "block";
 }
 
 function giveFeedback() {
@@ -175,7 +211,41 @@ function giveFeedback2() {
 
   document.getElementById("feedback2").innerHTML = feedback;
 }
-</script>
+function giveFeedback3() {
+  let answer = document.getElementById("answer3").value.toLowerCase();
+  let feedback = "<h3>Feedback</h3>";
+
+  if (answer.includes("cirrhosis") || answer.includes("heart") || answer.includes("malignancy")) {
+    feedback += "<p><strong>Good.</strong> You have identified an important cause.</p>";
+  } else {
+    feedback += "<p>Think systematically about hepatic, cardiac, malignant and other causes of ascites.</p>";
+  }
+
+  feedback += `
+  <p><strong>Main causes of ascites:</strong></p>
+  <ul>
+    <li>Cirrhosis / portal hypertension</li>
+    <li>Heart failure</li>
+    <li>Malignancy</li>
+    <li>Nephrotic syndrome</li>
+    <li>Infection, including tuberculosis</li>
+  </ul>
+
+  <p><strong>Ascites + hepatomegaly:</strong></p>
+  <ul>
+    <li>Right-sided heart failure</li>
+    <li>Chronic liver disease</li>
+    <li>Malignancy</li>
+    <li>Budd-Chiari syndrome</li>
+  </ul>
+
+  <p><strong>Clinical reasoning:</strong>
+  Combine the ascites with hepatomegaly, bilateral leg oedema and reduced exercise tolerance.
+  These findings should prompt consideration of a cardiac cause as well as hepatic causes.</p>
+  `;
+
+  document.getElementById("feedback3").innerHTML = feedback;
+}</script>
 
 </body>
 </html>
