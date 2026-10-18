@@ -38,7 +38,7 @@
 <h2>Choose a Case</h2>
 
 <button onclick="showCase1()">Case 1: Aortic Stenosis</button>
-<button>Case 2: Proximal Myopathy</button>
+<button onclick="showCase2()">Case 2: Proximal Myopathy</button>
 <button>Case 3: Ascites with Hepatomegaly</button>
 
 <div id="case1" class="case">
@@ -75,10 +75,44 @@ There are fine bibasal crepitations.
 
 </div>
 
+  <div id="case2" class="case">
+
+<h2>Case 2: Difficulty Climbing Stairs</h2>
+
+<p>
+A patient presents with gradually increasing difficulty climbing stairs
+and getting up from a chair.
+</p>
+
+<h3>Examination</h3>
+
+<p>
+There is symmetrical proximal muscle weakness in both upper and lower limbs.
+Sensation is intact. There is no ptosis or fatigability and no upper motor neuron signs.
+</p>
+
+<h3>Your Clinical Reasoning</h3>
+
+<p>Where is the lesion most likely localised? What are your main differential diagnoses?</p>
+
+<textarea id="answer2" placeholder="Type your answer here..."></textarea>
+
+<br><br>
+
+<button onclick="giveFeedback2()">Submit Answer</button>
+
+<div id="feedback2"></div>
+
+</div>
+
 <script>
 
 function showCase1() {
   document.getElementById("case1").style.display = "block";
+}
+
+  function showCase2() {
+  document.getElementById("case2").style.display = "block";
 }
 
 function giveFeedback() {
@@ -112,6 +146,35 @@ function giveFeedback() {
   document.getElementById("feedback").innerHTML = feedback;
 }
 
+function giveFeedback2() {
+  let answer = document.getElementById("answer2").value.toLowerCase();
+  let feedback = "<h3>Feedback</h3>";
+
+  if (answer.includes("myopathy") || answer.includes("muscle")) {
+    feedback += "<p><strong>Good.</strong> The findings localise most likely to muscle.</p>";
+  } else {
+    feedback += "<p>First localise the weakness: neuropathy, neuromuscular junction, or muscle.</p>";
+  }
+
+  feedback += `
+  <p><strong>Key reasoning:</strong></p>
+  <ul>
+    <li>Proximal weakness with intact sensation makes neuropathy less likely</li>
+    <li>No ptosis or fatigability makes neuromuscular junction disease less likely</li>
+    <li>No upper motor neuron signs</li>
+    <li>A primary muscle disorder is most likely</li>
+  </ul>
+
+  <p><strong>Main differentials:</strong></p>
+  <ul>
+    <li>Inflammatory myopathy</li>
+    <li>Endocrine myopathy, including thyroid myopathy</li>
+    <li>Drug-induced myopathy</li>
+  </ul>
+  `;
+
+  document.getElementById("feedback2").innerHTML = feedback;
+}
 </script>
 
 </body>
