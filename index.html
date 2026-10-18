@@ -2,15 +2,117 @@
 <html>
 <head>
   <title>LKC Y3 AI Clinical Reasoning Tutor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    button {
+      padding: 12px 18px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .case {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    textarea {
+      width: 95%;
+      height: 100px;
+      padding: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>LKC Y3 AI Clinical Reasoning Tutor</h1>
-  <p>Interactive clinical reasoning practice for Year 3 medical students.</p>
 
-  <h2>Choose a Case</h2>
+<h1>LKC Y3 AI Clinical Reasoning Tutor</h1>
+<p>Interactive clinical reasoning practice for Year 3 medical students.</p>
 
-  <button>Case 1: Aortic Stenosis</button>
-  <button>Case 2: Proximal Myopathy</button>
-  <button>Case 3: Ascites with Hepatomegaly</button>
+<h2>Choose a Case</h2>
+
+<button onclick="showCase1()">Case 1: Aortic Stenosis</button>
+<button>Case 2: Proximal Myopathy</button>
+<button>Case 3: Ascites with Hepatomegaly</button>
+
+<div id="case1" class="case">
+
+<h2>Case 1: Shortness of Breath and Systolic Murmur</h2>
+
+<p>
+A 78-year-old man presents with gradually worsening shortness of breath
+on exertion. He has no chest pain or syncope.
+</p>
+
+<h3>Examination</h3>
+
+<p>
+BP 138/72 mmHg, HR 68/min regular.<br>
+Apex beat is not displaced.<br>
+There is an ejection systolic murmur loudest at the right upper sternal border,
+radiating to both carotids.<br>
+S2 is soft and the carotid pulse is slow-rising.<br>
+There are fine bibasal crepitations.
+</p>
+
+<h3>Your Clinical Reasoning</h3>
+
+<p>What is the most likely diagnosis? Give the key findings supporting your answer.</p>
+
+<textarea id="answer1" placeholder="Type your answer here..."></textarea>
+
+<br><br>
+
+<button onclick="giveFeedback()">Submit Answer</button>
+
+<div id="feedback"></div>
+
+</div>
+
+<script>
+
+function showCase1() {
+  document.getElementById("case1").style.display = "block";
+}
+
+function giveFeedback() {
+
+  let answer = document.getElementById("answer1").value.toLowerCase();
+
+  let feedback = "<h3>Feedback</h3>";
+
+  if (answer.includes("aortic stenosis")) {
+    feedback += "<p><strong>Good.</strong> Aortic stenosis is the most likely diagnosis.</p>";
+  } else {
+    feedback += "<p>Think again about the site of the murmur, its radiation and the carotid pulse.</p>";
+  }
+
+  feedback += `
+  <p><strong>Key supporting findings:</strong></p>
+  <ul>
+    <li>Ejection systolic murmur</li>
+    <li>Loudest at the right upper sternal border</li>
+    <li>Radiation to the carotids</li>
+    <li>Slow-rising carotid pulse</li>
+    <li>Soft S2</li>
+    <li>Exertional dyspnoea</li>
+  </ul>
+
+  <p><strong>Clinical reasoning:</strong>
+  The combination of an ejection systolic murmur radiating to the carotids
+  and a slow-rising carotid pulse strongly suggests aortic stenosis.</p>
+  `;
+
+  document.getElementById("feedback").innerHTML = feedback;
+}
+
+</script>
+
 </body>
 </html>
